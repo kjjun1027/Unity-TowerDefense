@@ -5,6 +5,7 @@ using UnityEngine;
 public class TowerTemplate : ScriptableObject
 {
     public GameObject towerPrefab;
+    public GameObject followTowerPrefab;
     public Weapon[] weapon;
     [System.Serializable]
     public struct Weapon
@@ -12,6 +13,8 @@ public class TowerTemplate : ScriptableObject
         public Sprite sprite;
         public float damage;
         public float rate;
+        public float slow;
+        public float buff;
         public float range;
         public int cost;
         public int sell;
