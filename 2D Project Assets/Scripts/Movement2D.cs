@@ -11,7 +11,7 @@ public class Movement2D : MonoBehaviour
     [SerializeField]
     private Vector3 moveDirection = Vector3.zero;
     private float baseMoveSpeed;
-    private Vector3 targetPosition; // 목표 위치 저장 변수
+    private Vector3 targetPosition;
 
     public float MoveSpeed
     {
@@ -25,12 +25,11 @@ public class Movement2D : MonoBehaviour
 
     private void Update()
     {
-        Move(); // 이동 메서드 호출
+        Move();
     }
 
     private void Move()
     {
-        // 현재 방향으로 이동
         transform.position += moveDirection * moveSpeed * Time.deltaTime;    
     }
 

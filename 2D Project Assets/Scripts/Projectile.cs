@@ -9,7 +9,6 @@ public class Projectile : MonoBehaviour
     private Vector3 targetPosition;
     private float targetReachedThreshold = 0.1f;
     private float damage=1;
-
     public void Setup(Vector3 targetPosition)
     {
         movement2D = GetComponent<Movement2D>();
@@ -23,8 +22,6 @@ public class Projectile : MonoBehaviour
             Vector3 direction = (targetPosition - transform.position).normalized;
             movement2D.MoveTo(direction);
             float distanceToTarget = Vector3.Distance(transform.position, targetPosition);
-
-            // 거리가 임계값보다 작으면 목표에 도달한 것으로 간주합니다.
             if (distanceToTarget <= targetReachedThreshold)
             {
                 Destroy(gameObject);

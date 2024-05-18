@@ -8,7 +8,6 @@ public class OverScene : MonoBehaviour
     public GameObject GameScene;
     public GameObject player;
     private WaveSystem waveSystem;
-    // Start is called before the first frame update
     void Start()
     {
         Debug.Log("Plz");
@@ -25,8 +24,5 @@ public class OverScene : MonoBehaviour
         playerTransrom.position = new Vector3(0, 0, 0);
         waveSystem.NextWave();
         SceneManager.Instance.LoadGameScene();
-    }
-
-    // Update is called once per frame
-    
+    }   
 }

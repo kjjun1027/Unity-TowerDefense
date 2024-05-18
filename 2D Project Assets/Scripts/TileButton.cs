@@ -12,7 +12,6 @@ public class TileButton : MonoBehaviour
 
     private void Start()
     {
-        // 각 버튼에 클릭 이벤트 연결
         button1.onClick.AddListener(StartGame);
         button2.onClick.AddListener(ShowGameRules);
         button3.onClick.AddListener(CloseGameRules);

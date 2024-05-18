@@ -6,8 +6,6 @@ using UnityEngine;
 public class GameEnding : MonoBehaviour
 {
     public TextMeshProUGUI Ending;
-
-
     public void GameOver()
     {
         Ending.text = "Game Over";

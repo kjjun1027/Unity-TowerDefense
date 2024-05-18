@@ -55,7 +55,7 @@ public class PlayerAction : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Vector2 moveVec = new Vector2(h, v).normalized; // 입력 벡터를 정규화하여 대각선 이동을 가능하게 함
+        Vector2 moveVec = new Vector2(h, v).normalized;
         rigid.velocity = moveVec * Speed;
     }
     void OnCollisionEnter2D(Collision2D collision)
@@ -64,6 +64,7 @@ public class PlayerAction : MonoBehaviour
         {
             GameOver();
         }
+
     }
 
     void OnTriggerEnter2D(Collider2D other)

@@ -13,7 +13,6 @@ public class GameButton : MonoBehaviour
 
     private void Start()
     {
-        // 각 버튼에 클릭 이벤트 연결
         button1.onClick.AddListener(Restart);
         button2.onClick.AddListener(ShowPause);
         button3.onClick.AddListener(ClosePause);

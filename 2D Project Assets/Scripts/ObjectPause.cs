@@ -22,7 +22,7 @@ public class ObjectPause : MonoBehaviour
             savedAngularVelocity = rb.angularVelocity;
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            rb.isKinematic = true; // 물리 계산을 멈춤
+            rb.isKinematic = true;
             isPaused = true;
         }
     }
@@ -31,7 +31,7 @@ public class ObjectPause : MonoBehaviour
     {
         if (isPaused)
         {
-            rb.isKinematic = false; // 물리 계산을 재개
+            rb.isKinematic = false;
             rb.velocity = savedVelocity;
             rb.angularVelocity = savedAngularVelocity;
             isPaused = false;

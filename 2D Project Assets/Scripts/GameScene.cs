@@ -15,7 +15,7 @@ public class GameScene : MonoBehaviour
     private List<GameObject> deactivatedEnemies = new List<GameObject>();
     private WaveSystem waveSystem;
     private EnemySpawner enemySpawner;
-    // Start is called before the first frame update
+    public CameraFollow cameraFollow;
     void Start()
     {
         Transform playerTransrom = player.GetComponent<Transform>();
@@ -23,12 +23,15 @@ public class GameScene : MonoBehaviour
         GameScene1.SetActive(true);
         MainPanel.SetActive(true);
         PausePanel.SetActive(false);
-        waveSystem = FindObjectOfType<WaveSystem>(); // WaveSystem 컴포넌트를 가진 GameObject를 찾아서 할당
-        enemySpawner = FindObjectOfType<EnemySpawner>();   
+        waveSystem = FindObjectOfType<WaveSystem>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
+        cameraFollow = FindObjectOfType<CameraFollow>();
+        cameraFollow.SetPlayer(player.transform);
     }
     public void Update()
     {
-        if(enemySpawner.CurrentEnemyCount == 0)
+        cameraFollow.FollowPlayer();
+        if (enemySpawner.CurrentEnemyCount == 0)
         {
             waveSystem.NextWave();
         }

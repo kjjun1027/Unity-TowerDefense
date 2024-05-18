@@ -9,9 +9,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     private Transform canvasTransform;
     [SerializeField]
-    private Transform[] spawnPoints; // 스폰 포인트 배열
+    private Transform[] spawnPoints;
     [SerializeField]
-    private Transform playerTransform; // 플레이어의 Transform
+    private Transform playerTransform;
     private Wave currentWave;
     private WaveSystem waveSystem;
     private int currentEnemyCount=1;
@@ -43,15 +43,12 @@ public class EnemySpawner : MonoBehaviour
             GameObject clone = Instantiate(currentWave.enemyPrefabs[enemyIndex]);
             Enemy enemy = clone.GetComponent<Enemy>();
 
-            // 무작위로 스폰 포인트 선택
             int spawnPointIndex = Random.Range(0, spawnPoints.Length);
             Transform spawnPoint = spawnPoints[spawnPointIndex];
 
-            // 적을 무작위 스폰 포인트에 배치
             clone.transform.position = spawnPoint.position;
 
-            // 적 설정
-            enemy.Setup(this, playerTransform); // 플레이어의 위치를 전달
+            enemy.Setup(this, playerTransform);
             enemyList.Add(enemy);
 
             SpawnEnemyHPSilder(clone);
@@ -68,7 +65,6 @@ public class EnemySpawner : MonoBehaviour
         {
             if (ScoreManager.Instance != null)
             {
-                // 적이 파괴될 때 점수를 추가합니다.
                 ScoreManager.Instance.AddScore(score);
             }
         }
