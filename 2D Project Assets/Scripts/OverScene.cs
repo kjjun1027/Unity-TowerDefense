@@ -8,12 +8,13 @@ public class OverScene : MonoBehaviour
     public GameObject GameScene;
     public GameObject player;
     private WaveSystem waveSystem;
-    void Start()
+    public PlayerHp playerHP;
+    public void Start()
     {
         Debug.Log("Plz");
         waveSystem = FindObjectOfType<WaveSystem>();
+        playerHP = FindObjectOfType<PlayerHp>();
     }
-
     public void Restart()
     {
         ScoreManager.Instance.ResetScore();

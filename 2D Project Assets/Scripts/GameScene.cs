@@ -16,6 +16,8 @@ public class GameScene : MonoBehaviour
     private WaveSystem waveSystem;
     private EnemySpawner enemySpawner;
     public CameraFollow cameraFollow;
+    private PlayerHp playerHp;
+    private PlayerAction playerAction;
     void Start()
     {
         Transform playerTransrom = player.GetComponent<Transform>();
@@ -27,13 +29,24 @@ public class GameScene : MonoBehaviour
         enemySpawner = FindObjectOfType<EnemySpawner>();
         cameraFollow = FindObjectOfType<CameraFollow>();
         cameraFollow.SetPlayer(player.transform);
+        playerHp = FindObjectOfType<PlayerHp>();  
+        playerAction = FindObjectOfType<PlayerAction>();
     }
     public void Update()
     {
+        if(playerAction.Resetnumber == 1)
+        {
+            playerHp.Resetto();
+            playerAction.Resetnumber = 0;
+        }
         cameraFollow.FollowPlayer();
         if (enemySpawner.CurrentEnemyCount == 0)
         {
             waveSystem.NextWave();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ShowPause();
         }
     }
 
@@ -57,6 +70,7 @@ public class GameScene : MonoBehaviour
     }
     public void ReStart()
     {
+        playerHp.Resetto();
         waveSystem.currentWaveIndex = 0;
         ScoreManager.Instance.ResetScore();
         DestroyAllEnemies();

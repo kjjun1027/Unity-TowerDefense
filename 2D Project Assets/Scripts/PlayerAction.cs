@@ -12,6 +12,8 @@ public class PlayerAction : MonoBehaviour
     public GameObject GameScene;
     public GameObject OverScene;
     private GameEnding GameEnding;
+    private PlayerHp playerHp;
+    public int Resetnumber;
 
     private List<GameObject> deactivatedEnemies = new List<GameObject>();
     void Awake()
@@ -19,39 +21,61 @@ public class PlayerAction : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         GameEnding = FindObjectOfType<GameEnding>();
-
+        playerHp = GetComponent<PlayerHp>();
     }
 
    
     void Update()
     {
+        Resetnumber = 0;
+        playerHp.isDie = false;
         h = Input.GetAxisRaw("Horizontal");
         v = Input.GetAxisRaw("Vertical");
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        anim.SetBool("hstance", true);
+        // 마우스 위치에 따른 방향 설정
         if (mousePosition.x < transform.position.x)
         {
-            if (anim.GetInteger("hAxisRaw") != -1)
+            if (h != 0||v!=0)
             {
-                anim.SetBool("IsChage", true);
-                anim.SetInteger("hAxisRaw", -1);
+                if (anim.GetInteger("hAxisRaw") != -1)
+                {
+                    anim.SetBool("IsChage", true);
+                    anim.SetInteger("hAxisRaw", -1);
+                }
+                else
+                {
+                    anim.SetBool("IsChage", false);
+                }
             }
             else
             {
-                anim.SetBool("IsChage", false);
+                anim.SetInteger("hAxisRaw", -1);
+                anim.SetBool("IsChage", true);
             }
         }
         else
         {
-            if (anim.GetInteger("hAxisRaw") != 1)
+            if(h!=0||v!=0)
             {
-                anim.SetBool("IsChage", true);
-                anim.SetInteger("hAxisRaw", 1);
+                if (anim.GetInteger("hAxisRaw") != 1)
+                {
+                    anim.SetBool("IsChage", true);
+                    anim.SetInteger("hAxisRaw", 1);
+                }
+                else
+                {
+                    anim.SetBool("IsChage", false);
+                }
             }
             else
             {
-                anim.SetBool("IsChage", false);
+                anim.SetInteger("hAxisRaw", 1);
+                anim.SetBool("IsChage", true);
             }
         }
+
+
     }
     private void FixedUpdate()
     {
@@ -62,7 +86,7 @@ public class PlayerAction : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            GameOver();
+            playerHp.TakeDamage(1);
         }
 
     }
@@ -71,12 +95,13 @@ public class PlayerAction : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            GameOver();
+            playerHp.TakeDamage(1);
         }
     }
 
     public void GameOver()
-    {      
+    {
+        Resetnumber = 1;
         DestroyAllEnemies();
         Debug.Log("Game Over!");
         GameEnding.GameOver();  
